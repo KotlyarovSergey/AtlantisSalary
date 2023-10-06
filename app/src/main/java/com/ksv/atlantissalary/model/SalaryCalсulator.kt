@@ -13,19 +13,19 @@ class SalaryCalculator (val grade: Double, val allWorkedHours: AllWorkedHours){
     //var summary: String = ""
     fun calculate():Double{
         val accruals = listOf(
-            BaseSalary(grade, allWorkedHours.totalWorkedHours),
-            PremiumSalary(grade, allWorkedHours),
-            WeekendsSalary(grade, allWorkedHours.ovdHours),
-            AdditionalWeekendsSalary(grade, allWorkedHours.ovdHours),
-            OvertimeSalry(grade, allWorkedHours.osrHours),
-            AdditionalNightworkSalary(grade, allWorkedHours.nightHorus),
-            AdditionalNightWeekedsSalary(grade, allWorkedHours.osrHours),
-            HarmfullnessSalary(grade, allWorkedHours.totalWorkedHours, allWorkedHours.ovdHours)
+            BaseSalary(),
+            PremiumSalary(),
+            WeekendsSalary(),
+            AdditionalWeekendsSalary(),
+            OvertimeSalry(),
+            AdditionalNightworkSalary(),
+            AdditionalNightWeekedsSalary(),
+            HarmfullnessSalary()
         )
 
         var amount = 0.0
         for (salaryCalc: SalaryCalc in accruals){
-            val salary = salaryCalc.calc()
+            val salary = salaryCalc.calc(grade, allWorkedHours)
             amount += salary
             //this.summary += String.format("%.2f", salary) + "\n"
         }

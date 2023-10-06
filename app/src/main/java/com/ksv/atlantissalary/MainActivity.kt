@@ -30,10 +30,19 @@ class MainActivity : AppCompatActivity() {
         val ovdHoursInNightShift = 8.0
         val osrHoursInNightShift = 3.0
 
-        val allHours = binding.editTextTotalHours.text.toString().toDouble()
-        val nightHours = binding.editTextNightHours.text.toString().toDouble()
-        val dayOverShifts = binding.editTextDaysOvershifts.text.toString().toInt()
-        val nightOverShifts = binding.editTextNightOvershifts.text.toString().toInt()
+        var allHours = 0.0
+        var nightHours = 0.0
+        var dayOverShifts = 0
+        var nightOverShifts = 0
+        try {
+            allHours = binding.editTextTotalHours.text.toString().toDouble()
+            nightHours = binding.editTextNightHours.text.toString().toDouble()
+            dayOverShifts = binding.editTextDaysOvershifts.text.toString().toInt()
+            nightOverShifts = binding.editTextNightOvershifts.text.toString().toInt()
+
+        } catch (e: Exception){
+
+        }
         val ovdHours = dayOverShifts * ovdHoursInDayShift +  nightOverShifts * ovdHoursInNightShift
         val osrHours = nightOverShifts * osrHoursInNightShift
         return AllWorkedHours(allHours, nightHours, ovdHours, osrHours)

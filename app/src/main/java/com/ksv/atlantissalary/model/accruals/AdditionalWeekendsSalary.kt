@@ -1,13 +1,14 @@
 package com.ksv.atlantissalary.model.accruals
 
+import com.ksv.atlantissalary.model.AllWorkedHours
 import com.ksv.atlantissalary.model.SalaryCalc
 
-class AdditionalWeekendsSalary(val grade: Double, val ovdHours: Double) : SalaryCalc {
+class AdditionalWeekendsSalary : SalaryCalc {
     private val nameOfAccural = "Доплата за работу в праздники и выходные\n"
-    override fun calc(): Double {
-        return this.grade * this.ovdHours
+    override fun calc(grade: Double, allWorkedHours: AllWorkedHours): Double {
+        return grade * allWorkedHours.ovdHours
     }
-    override fun nameOfAccurals(): String {
+    override fun nameOfAccruals(): String {
         return this.nameOfAccural
     }
 }
