@@ -5,13 +5,13 @@ class SalaryCalсulator (
     private val totalHours: TotalHours,
     private val overShifts: OverShifts){
 
-    val OVDHOURSINDAYSHIFT = 11.0
-    val OVDHOURSINNIGTSHIFT = 8.0
-    val OSRHOURSINNIGTSHIFT = 3.0
-    var PREMIUMPERCENT = 0.25
-    val NIGHTADDITIONALPERCENT = 0.2
-    val NIGHTWEEKENDADDITIONALPERCENT = 1.4
-    val HARMFULLNESSPERCENT = 0.4
+    private val ovdHoursInDayShift = 11.0
+    private val ovdHoursInNightShift = 8.0
+    private val osrHoursInNightShift = 3.0
+    private var premiumPercent = 0.25
+    private val nightAdditionalPercent = 0.2
+    private val nightWeekendAdditionalPercent = 1.4
+    private val harmfulnessPercent = 0.04
 
     var baseSalary: Double = 0.0
     var overtimeSalry: Double = 0.0
@@ -38,18 +38,18 @@ class SalaryCalсulator (
     private fun calcBaseSalary() : Double = this.grade * this.totalHours.workedHours
 
     private fun calcOverHours(){
-        this.ovdHours = this.overShifts.daysOverShifts * OVDHOURSINDAYSHIFT
-        this.ovdHours += this.overShifts.nightsOverShifts * OVDHOURSINNIGTSHIFT
-        this.osrHours = this.overShifts.nightsOverShifts * OSRHOURSINNIGTSHIFT
+        this.ovdHours = this.overShifts.daysOverShifts * ovdHoursInDayShift
+        this.ovdHours += this.overShifts.nightsOverShifts * ovdHoursInNightShift
+        this.osrHours = this.overShifts.nightsOverShifts * osrHoursInNightShift
     }
 
     private fun calcOvertimeSalary():Double = this.grade * this.osrHours
     private fun calcWeekendsSalary(): Double = this.grade * this.ovdHours
     private fun calcAdditionalWeekendsSalary(): Double = this.grade * this.ovdHours
-    private fun calcPremiumSalary(): Double = (this.baseSalary + this.weekendsSalary + this.overtimeSalry) * PREMIUMPERCENT
-    private fun calcAdditionalNightworkSalary(): Double = this.grade * this.totalHours.nightHorus * NIGHTADDITIONALPERCENT
-    private fun calcAdditionalNightWeekendsSalary(): Double = this.grade * (this.osrHours / 3) * NIGHTWEEKENDADDITIONALPERCENT
-    private fun calcHarmfullnessSalary(): Double = (this.baseSalary + this.weekendsSalary) * HARMFULLNESSPERCENT
+    private fun calcPremiumSalary(): Double = (this.baseSalary + this.weekendsSalary + this.overtimeSalry) * premiumPercent
+    private fun calcAdditionalNightworkSalary(): Double = this.grade * this.totalHours.nightHorus * nightAdditionalPercent
+    private fun calcAdditionalNightWeekendsSalary(): Double = this.grade * (this.osrHours / 3) * nightWeekendAdditionalPercent
+    private fun calcHarmfullnessSalary(): Double = (this.baseSalary + this.weekendsSalary) * harmfulnessPercent
 
 
 }
