@@ -1,55 +1,37 @@
 package com.ksv.atlantissalary.model
 
-class SalaryCalсulator (
-    private val grade: Double,
-    private val totalHours: TotalHours,
-    private val overShifts: OverShifts){
+import com.ksv.atlantissalary.model.accruals.AdditionalNightWeekedsSalary
+import com.ksv.atlantissalary.model.accruals.AdditionalNightworkSalary
+import com.ksv.atlantissalary.model.accruals.AdditionalWeekendsSalary
+import com.ksv.atlantissalary.model.accruals.BaseSalary
+import com.ksv.atlantissalary.model.accruals.HarmfullnessSalary
+import com.ksv.atlantissalary.model.accruals.OvertimeSalry
+import com.ksv.atlantissalary.model.accruals.PremiumSalary
+import com.ksv.atlantissalary.model.accruals.WeekendsSalary
 
-    private val ovdHoursInDayShift = 11.0
-    private val ovdHoursInNightShift = 8.0
-    private val osrHoursInNightShift = 3.0
-    private var premiumPercent = 0.25
-    private val nightAdditionalPercent = 0.2
-    private val nightWeekendAdditionalPercent = 1.4
-    private val harmfulnessPercent = 0.04
+class SalaryCalculator (val grade: Double, val allWorkedHours: AllWorkedHours){
+    //var summary: String = ""
+    fun calculate():Double{
+        val accruals = listOf(
+            BaseSalary(grade, allWorkedHours.totalWorkedHours),
+            PremiumSalary(grade, allWorkedHours),
+            WeekendsSalary(grade, allWorkedHours.ovdHours),
+            AdditionalWeekendsSalary(grade, allWorkedHours.ovdHours),
+            OvertimeSalry(grade, allWorkedHours.osrHours),
+            AdditionalNightworkSalary(grade, allWorkedHours.nightHorus),
+            AdditionalNightWeekedsSalary(grade, allWorkedHours.osrHours),
+            HarmfullnessSalary(grade, allWorkedHours.totalWorkedHours, allWorkedHours.ovdHours)
+        )
 
-    var baseSalary: Double = 0.0
-    var overtimeSalry: Double = 0.0
-    var osrHours: Double = 0.0
-    var ovdHours: Double = 0.0
-    var weekendsSalary = 0.0
-    var additionalWeekendsSalary = 0.0
-    var premiumSalary = 0.0
-    var additionalNightworkSalary = 0.0
-    var additionalNightWeekedsSalary = 0.0
-    var harmfullnessSalary = 0.0
+        var amount = 0.0
+        for (salaryCalc: SalaryCalc in accruals){
+            val salary = salaryCalc.calc()
+            amount += salary
+            //this.summary += String.format("%.2f", salary) + "\n"
+        }
 
-    init {
-        this.baseSalary = calcBaseSalary()
-        calcOverHours()
-        this.overtimeSalry = calcOvertimeSalary()
-        this.weekendsSalary = this.calcWeekendsSalary()
-        this.additionalWeekendsSalary = this.calcAdditionalWeekendsSalary()
-        this.premiumSalary = this.calcPremiumSalary()
-        this.additionalNightworkSalary = this.calcAdditionalNightworkSalary()
-        this.additionalNightWeekedsSalary = this.calcAdditionalNightWeekendsSalary()
-        this.harmfullnessSalary = this.calcHarmfullnessSalary()
+        return amount
     }
-    private fun calcBaseSalary() : Double = this.grade * this.totalHours.workedHours
-
-    private fun calcOverHours(){
-        this.ovdHours = this.overShifts.daysOverShifts * ovdHoursInDayShift
-        this.ovdHours += this.overShifts.nightsOverShifts * ovdHoursInNightShift
-        this.osrHours = this.overShifts.nightsOverShifts * osrHoursInNightShift
-    }
-
-    private fun calcOvertimeSalary():Double = this.grade * this.osrHours
-    private fun calcWeekendsSalary(): Double = this.grade * this.ovdHours
-    private fun calcAdditionalWeekendsSalary(): Double = this.grade * this.ovdHours
-    private fun calcPremiumSalary(): Double = (this.baseSalary + this.weekendsSalary + this.overtimeSalry) * premiumPercent
-    private fun calcAdditionalNightworkSalary(): Double = this.grade * this.totalHours.nightHorus * nightAdditionalPercent
-    private fun calcAdditionalNightWeekendsSalary(): Double = this.grade * (this.osrHours / 3) * nightWeekendAdditionalPercent
-    private fun calcHarmfullnessSalary(): Double = (this.baseSalary + this.weekendsSalary) * harmfulnessPercent
 
 
 }
