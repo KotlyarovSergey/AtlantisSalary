@@ -4,6 +4,7 @@ import com.ksv.atlantissalary.model.accruals.AdditionalNightWeekedsSalary
 import com.ksv.atlantissalary.model.accruals.AdditionalNightworkSalary
 import com.ksv.atlantissalary.model.accruals.AdditionalWeekendsSalary
 import com.ksv.atlantissalary.model.accruals.BaseSalary
+import com.ksv.atlantissalary.model.accruals.FeedSalary
 import com.ksv.atlantissalary.model.accruals.HarmfullnessSalary
 import com.ksv.atlantissalary.model.accruals.OvertimeSalry
 import com.ksv.atlantissalary.model.accruals.PremiumSalary
@@ -11,26 +12,28 @@ import com.ksv.atlantissalary.model.accruals.WeekendsSalary
 
 class SalaryCalculator (val grade: Double, val allWorkedHours: AllWorkedHours){
     //var summary: String = ""
-    fun calculate():Double{
+    fun calculate():List<NameAmountPair>{
         val accruals = listOf(
+            OvertimeSalry(),
+            FeedSalary(),
             BaseSalary(),
             PremiumSalary(),
             WeekendsSalary(),
             AdditionalWeekendsSalary(),
-            OvertimeSalry(),
-            AdditionalNightworkSalary(),
+            HarmfullnessSalary(),
             AdditionalNightWeekedsSalary(),
-            HarmfullnessSalary()
+            AdditionalNightworkSalary()
         )
 
-        var amount = 0.0
-        for (salaryCalc: SalaryCalc in accruals){
-            val salary = salaryCalc.calc(grade, allWorkedHours)
-            amount += salary
-            //this.summary += String.format("%.2f", salary) + "\n"
+        val allAccruals = mutableListOf<NameAmountPair>()
+        for (accrual: Caclulable in accruals){
+            val amount = accrual.calc(grade, allWorkedHours)
+            val name = accrual.nameOfAccruals()
+            val nameAmountPair = NameAmountPair(name, amount)
+            allAccruals.add(nameAmountPair)
         }
 
-        return amount
+        return allAccruals
     }
 
 
