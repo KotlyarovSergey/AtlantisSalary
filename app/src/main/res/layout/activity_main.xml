@@ -9,7 +9,7 @@
     <EditText
         android:id="@+id/editTextSalaryGrade"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
@@ -21,8 +21,8 @@
 
     <EditText
         android:id="@+id/editTextTotalHours"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="158dp"
+        android:layout_height="48dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="number|numberDecimal"
@@ -33,7 +33,7 @@
     <EditText
         android:id="@+id/editTextNightHours"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
@@ -82,7 +82,7 @@
     <EditText
         android:id="@+id/editTextDaysOvershifts"
         android:layout_width="140dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="number"
@@ -101,7 +101,7 @@
     <EditText
         android:id="@+id/editTextNightOvershifts"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -145,7 +145,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/textViewOnHands"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0 р."
