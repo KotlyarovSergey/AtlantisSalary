@@ -40,9 +40,10 @@ class Controller(private val binding: ActivityMainBinding) {
         try {
             allHours = binding.editTextTotalHours.text.toString().toDouble()
             nightHours = binding.editTextNightHours.text.toString().toDouble()
-            dayOverShifts = binding.editTextDaysOvershifts.text.toString().toInt()
-            nightOverShifts = binding.editTextNightOvershifts.text.toString().toInt()
-
+            if(binding.switchOverShifts.isChecked) {
+                dayOverShifts = binding.editTextDaysOvershifts.text.toString().toInt()
+                nightOverShifts = binding.editTextNightOvershifts.text.toString().toInt()
+            }
         } catch (e: Exception) {
             // do nothing
         }
