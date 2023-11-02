@@ -4,8 +4,8 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.CompoundButton
-import android.widget.ImageView
+import android.widget.TableRow
+import android.widget.TextView
 import com.ksv.atlantissalary.controller.Controller
 import com.ksv.atlantissalary.databinding.ActivityMainBinding
 
@@ -20,11 +20,31 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        controller = Controller(binding)
+        controller = Controller(binding, this)
         controller.onChangeInputData()
         addListeners()
+        
+        //val tableRow = TableRow(this)
+    }
 
+    fun addRowClick(view: View){
+        addRow(listOf("Abra", "Kadabra"))
+    }
+    fun addRow(strins: List<String>){
+        val tableRow = TableRow(this)
+        val textView1 = TextView(this)
+        textView1.text = strins[0]
+        tableRow.addView(textView1, TableRow.LayoutParams(
+            TableRow.LayoutParams.WRAP_CONTENT,TableRow.LayoutParams.WRAP_CONTENT, 0.5f
+        ))
+        val textView2 = TextView(this)
+        textView2.text = strins[1]
+        tableRow.addView(textView2, TableRow.LayoutParams(
+            TableRow.LayoutParams.WRAP_CONTENT,TableRow.LayoutParams.WRAP_CONTENT, 1.0f
+        ))
 
+        binding.tableLayoutAccruals.addView(tableRow)
+        setContentView(binding.tableLayoutAccruals)
     }
 
     private fun addListeners() {
@@ -42,14 +62,17 @@ class MainActivity : AppCompatActivity() {
         binding.switchOverShifts.setOnCheckedChangeListener { _, checked ->
             controller.onChangeInputData()
             if (checked) {
-                //binding.tableLayoutOverShifts.visibility = View.VISIBLE
+//                binding.tableLayoutOverShifts.visibility = View.VISIBLE
+//                binding.tableLayoutOverShifts.layoutParams.height = LayoutParams.WRAP_CONTENT
                 binding.editTextDaysOvershifts.isEnabled = true
                 binding.editTextNightOvershifts.isEnabled = true
                 binding.textViewSwitchOverShifts.setTextColor(Color.BLACK)
                 binding.textViewDaysOverShifts.setTextColor(Color.BLACK)
                 binding.textViewNightOverShifts.setTextColor(Color.BLACK)
             } else {
-                //binding.tableLayoutOverShifts.visibility = View.INVISIBLE
+//                binding.tableLayoutOverShifts.visibility = View.INVISIBLE
+//                binding.tableLayoutOverShifts.layoutParams.height = 0
+
                 binding.editTextDaysOvershifts.isEnabled = false
                 binding.editTextNightOvershifts.isEnabled = false
                 binding.textViewSwitchOverShifts.setTextColor(Color.GRAY)

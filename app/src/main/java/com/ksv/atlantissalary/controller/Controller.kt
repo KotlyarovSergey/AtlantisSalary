@@ -1,15 +1,19 @@
 package com.ksv.atlantissalary.controller
 
+import android.widget.TableLayout
+import androidx.appcompat.app.AppCompatActivity
 import com.ksv.atlantissalary.databinding.ActivityMainBinding
 import com.ksv.atlantissalary.model.AllWorkedHours
 import com.ksv.atlantissalary.model.NameAmountPair
 import com.ksv.atlantissalary.model.SalaryCalculator
+import com.ksv.atlantissalary.utils.TableLayoutConstructor
 import com.ksv.atlantissalary.view.Viewer
 
-class Controller(private val binding: ActivityMainBinding) {
+class Controller(private val binding: ActivityMainBinding, val activity: AppCompatActivity) {
     private var grade = 0.0
-    lateinit private var allWorkedHours: AllWorkedHours
-    private var viever = Viewer(binding)
+    private lateinit var allWorkedHours: AllWorkedHours
+    private var viewer = Viewer(binding, activity)
+
 
     fun onChangeInputData(){
         getGrade()
@@ -17,8 +21,12 @@ class Controller(private val binding: ActivityMainBinding) {
 
         val salaryCalculator = SalaryCalculator(grade, allWorkedHours)
         val accruals = salaryCalculator.calculate()
-        fillTable(accruals)
+        viewer.fillAccrualsTable(accruals)
+
         fillTotalAmount(accruals)
+            // добавить детей !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        val onHandAmount = salaryCalculator.calcOnHandAmount(0)
+        viewer.setOnHandAmount(onHandAmount)
     }
 
     private fun getGrade(){
@@ -51,15 +59,14 @@ class Controller(private val binding: ActivityMainBinding) {
         val osrHours = nightOverShifts * osrHoursInNightShift
         allWorkedHours = AllWorkedHours(allHours, nightHours, ovdHours, osrHours)
     }
-    private fun fillTable(accruals: List<NameAmountPair>){
 
-    }
+
     private fun fillTotalAmount(accruals: List<NameAmountPair>){
         var summ = 0.0
         for(once : NameAmountPair in accruals){
             summ += once.amount
         }
-        viever.setTotalAmount(summ)
+        viewer.setTotalAmount(summ)
     }
 
 }
