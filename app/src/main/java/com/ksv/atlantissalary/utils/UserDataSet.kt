@@ -1,9 +1,11 @@
 package com.ksv.atlantissalary.utils
 
-import com.ksv.atlantissalary.model.AllWorkedHours
 
 data class UserDataSet(
-    val grade: Double,
-    val hours: AllWorkedHours,
-    val overShifts: Boolean
+    val grade: Float,
+    val totalHours: Float,
+    val nightHours: Float,
+    val daysOverShifts: Int,
+    val nightsOverShifts: Int,
+    val overShiftsChecked: Boolean
 )
