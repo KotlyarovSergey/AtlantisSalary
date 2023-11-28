@@ -1,5 +1,7 @@
 package com.ksv.atlantissalary
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,10 +10,14 @@ import android.widget.TableRow
 import android.widget.TextView
 import com.ksv.atlantissalary.controller.Controller
 import com.ksv.atlantissalary.databinding.ActivityMainBinding
+import com.ksv.atlantissalary.model.AllWorkedHours
+import com.ksv.atlantissalary.utils.SettingKeeper
+import com.ksv.atlantissalary.utils.UserDataSet
 
 class MainActivity : AppCompatActivity() {
-    lateinit var binding: ActivityMainBinding
-    lateinit var controller: Controller
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var controller: Controller
+    private lateinit var prefs: SharedPreferences
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,29 +29,26 @@ class MainActivity : AppCompatActivity() {
         controller = Controller(binding, this)
         controller.onChangeInputData()
         addListeners()
-        
-        //val tableRow = TableRow(this)
+
+        prefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
+
     }
 
-    fun addRowClick(view: View){
-        addRow(listOf("Abra", "Kadabra"))
+    override fun onStart() {
+        super.onStart()
+        val settingKeeper = SettingKeeper()
+        val userDataSet = settingKeeper.loadUserDataSet(prefs)
+        binding.editTextSalaryGrade.setText(userDataSet.grade.toString())
     }
-    fun addRow(strins: List<String>){
-        val tableRow = TableRow(this)
-        val textView1 = TextView(this)
-        textView1.text = strins[0]
-        tableRow.addView(textView1, TableRow.LayoutParams(
-            TableRow.LayoutParams.WRAP_CONTENT,TableRow.LayoutParams.WRAP_CONTENT, 0.5f
-        ))
-        val textView2 = TextView(this)
-        textView2.text = strins[1]
-        tableRow.addView(textView2, TableRow.LayoutParams(
-            TableRow.LayoutParams.WRAP_CONTENT,TableRow.LayoutParams.WRAP_CONTENT, 1.0f
-        ))
 
-        binding.tableLayoutAccruals.addView(tableRow)
-        setContentView(binding.tableLayoutAccruals)
+    override fun onStop() {
+        super.onStop()
+        val settingKeeper = SettingKeeper()
+        val grade = binding.editTextSalaryGrade.toString().toDouble()
+        val userDataSet = UserDataSet(grade, AllWorkedHours(0.0, 0.0, 0.0, 0.0), false)
+        settingKeeper.saveUserDataSet(userDataSet, prefs)
     }
+//
 
     private fun addListeners() {
         addTextChangedListeners()
@@ -62,22 +65,23 @@ class MainActivity : AppCompatActivity() {
         binding.switchOverShifts.setOnCheckedChangeListener { _, checked ->
             controller.onChangeInputData()
             if (checked) {
-//                binding.tableLayoutOverShifts.visibility = View.VISIBLE
+                binding.tableLayoutOverShifts.visibility = View.VISIBLE
 //                binding.tableLayoutOverShifts.layoutParams.height = LayoutParams.WRAP_CONTENT
-                binding.editTextDaysOvershifts.isEnabled = true
-                binding.editTextNightOvershifts.isEnabled = true
-                binding.textViewSwitchOverShifts.setTextColor(Color.BLACK)
-                binding.textViewDaysOverShifts.setTextColor(Color.BLACK)
-                binding.textViewNightOverShifts.setTextColor(Color.BLACK)
+
+//                binding.editTextDaysOvershifts.isEnabled = true
+//                binding.editTextNightOvershifts.isEnabled = true
+//                binding.textViewSwitchOverShifts.setTextColor(Color.BLACK)
+//                binding.textViewDaysOverShifts.setTextColor(Color.BLACK)
+//                binding.textViewNightOverShifts.setTextColor(Color.BLACK)
             } else {
-//                binding.tableLayoutOverShifts.visibility = View.INVISIBLE
+                binding.tableLayoutOverShifts.visibility = View.GONE
 //                binding.tableLayoutOverShifts.layoutParams.height = 0
 
-                binding.editTextDaysOvershifts.isEnabled = false
-                binding.editTextNightOvershifts.isEnabled = false
-                binding.textViewSwitchOverShifts.setTextColor(Color.GRAY)
-                binding.textViewDaysOverShifts.setTextColor(Color.GRAY)
-                binding.textViewNightOverShifts.setTextColor(Color.GRAY)
+//                binding.editTextDaysOvershifts.isEnabled = false
+//                binding.editTextNightOvershifts.isEnabled = false
+//                binding.textViewSwitchOverShifts.setTextColor(Color.GRAY)
+//                binding.textViewDaysOverShifts.setTextColor(Color.GRAY)
+//                binding.textViewNightOverShifts.setTextColor(Color.GRAY)
             }
         }
     }

@@ -31,7 +31,7 @@ class TableLayoutConstructor (val tableLayout: TableLayout, val activity: Activi
         val tvAmount = TextView(activity)
         tvAmount.text = data[1]
         //tvAmount.layoutParams = layoutParams1
-        tvAmount.setPadding(2, 0, 10, 0)
+        tvAmount.setPadding(2, 0, 15, 0)
         tvAmount.setBackgroundResource(R.drawable.border)
 
         row.addView(tvName)
@@ -43,7 +43,7 @@ class TableLayoutConstructor (val tableLayout: TableLayout, val activity: Activi
     fun addTitleRow(captions: List<String>){
         val row = TableRow(activity)
         val layoutParams0 = TableRow.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT, 5f)
-        //val layoutParams1 = TableRow.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT, 1f)
+        val layoutParams1 = TableRow.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.MATCH_PARENT, 0f)
 
         val tvName = TextView(activity)
         tvName.text = captions[0]
@@ -53,8 +53,8 @@ class TableLayoutConstructor (val tableLayout: TableLayout, val activity: Activi
 
         val tvAmount = TextView(activity)
         tvAmount.text = captions[1]
-        //tvAmount.layoutParams = layoutParams1
-        tvAmount.setPadding(2, 0, 10, 0)
+        tvAmount.layoutParams = layoutParams1
+        tvAmount.setPadding(2, 0, 15, 0)
         tvAmount.setBackgroundResource(R.drawable.border)
         tvName.gravity = Gravity.CENTER
 

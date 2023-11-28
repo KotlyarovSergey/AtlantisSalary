@@ -10,166 +10,19 @@
     <EditText
         android:id="@+id/editTextSalaryGrade"
         android:layout_width="80dp"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="62dp"
+        android:background="@color/white"
         android:ems="10"
+        android:gravity="center"
         android:hint="Оклад (тариф), руб./час"
         android:inputType="number|numberDecimal"
-        android:text="275.55"
+        android:paddingTop="1px"
+        android:paddingBottom="1px"
+        android:text="0.00"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
-    <TableLayout
-        android:id="@+id/tableLayoutWorkedHours"
-        android:layout_width="400dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextSalaryGrade">
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_weight="0.5"
-                android:text="Всего часов"
-                android:textSize="18sp"
-                tools:layout_editor_absoluteX="16dp"
-                tools:layout_editor_absoluteY="216dp" />
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_weight="0.5"
-                android:text="Ночных часов"
-                android:textSize="18sp"
-                tools:layout_editor_absoluteX="188dp"
-                tools:layout_editor_absoluteY="216dp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <EditText
-                android:id="@+id/editTextTotalHours"
-                android:layout_height="48dp"
-                android:layout_marginRight="80dp"
-                android:layout_weight="0.5"
-                android:ems="10"
-                android:inputType="number|numberDecimal"
-                android:text="184"
-                android:textAlignment="center" />
-
-            <EditText
-                android:id="@+id/editTextNightHours"
-                android:layout_height="48dp"
-                android:layout_marginRight="80dp"
-                android:layout_weight="0.5"
-                android:ems="10"
-                android:inputType="number|numberDecimal"
-                android:text="60"
-                android:textAlignment="center" />
-
-        </TableRow>
-    </TableLayout>
-
-    <Switch
-        android:id="@+id/switchOverShifts"
-        android:layout_width="48dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:textSize="8sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayoutWorkedHours" />
-
-    <TextView
-        android:id="@+id/textViewSwitchOverShifts"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="Подработки"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/switchOverShifts"
-        app:layout_constraintTop_toTopOf="@+id/switchOverShifts" />
-
-    <TableLayout
-        android:id="@+id/tableLayoutOverShifts"
-        android:layout_width="400dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:visibility="visible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/switchOverShifts">
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/textViewDaysOverShifts"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_weight="0.5"
-                android:text="Дневные"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textViewNightOverShifts"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_weight="0.5"
-                android:text="Ночные"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="18sp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <EditText
-                android:id="@+id/editTextDaysOvershifts"
-                android:layout_height="48dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="80dp"
-                android:layout_weight="0.5"
-                android:ems="10"
-                android:enabled="false"
-                android:inputType="number"
-                android:text="2"
-                android:textAlignment="center" />
-
-            <EditText
-                android:id="@+id/editTextNightOvershifts"
-                android:layout_height="48dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="80dp"
-                android:layout_weight="0.5"
-                android:ems="10"
-                android:enabled="false"
-                android:inputType="number"
-                android:text="3"
-                android:textAlignment="center" />
-
-        </TableRow>
-
-
-    </TableLayout>
 
 
     <TextView
@@ -221,13 +74,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/border_table"
         android:backgroundTint="#B3E5FC"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayoutOverShifts">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
         <TableRow
             android:layout_width="match_parent"
@@ -261,14 +114,212 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:backgroundTint="#AED581"
+        android:backgroundTint="#3F51B5"
         android:text="Рассчитать"
-        android:textColor="#8E24AA"
+        android:textColor="#03A9F4"
         android:textSize="24sp"
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="0.5"
+        android:text="Всего часов"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSalaryGrade" />
+
+    <EditText
+        android:id="@+id/editTextTotalHours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_weight="0.5"
+        android:background="@color/white"
+        android:ems="3"
+        android:inputType="number|numberDecimal"
+        android:maxLength="5"
+        android:paddingTop="1px"
+        android:paddingBottom="5px"
+        android:text="184"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_weight="0.5"
+        android:text="Ночных часов"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextTotalHours"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@+id/editTextTotalHours" />
+
+    <EditText
+        android:id="@+id/editTextNightHours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_weight="0.5"
+        android:background="@color/white"
+        android:ems="3"
+        android:inputType="number|numberDecimal"
+        android:maxLength="5"
+        android:padding="1px"
+        android:text="60"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView3"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="@+id/textView3" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#3F51B5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:text="Atlantis Salary"
+            android:textColor="@color/white"
+            android:textSize="34sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+        <Switch
+            android:id="@+id/switchOverShifts"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewSwitchOverShifts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Подработки (смен)"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@id/switchOverShifts"
+            app:layout_constraintStart_toEndOf="@id/switchOverShifts"
+            app:layout_constraintTop_toTopOf="@id/switchOverShifts"
+            tools:layout_editor_absoluteX="72dp" />
+
+        <TableLayout
+            android:id="@+id/tableLayoutOverShifts"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/switchOverShifts">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textViewDaysOverShifts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Дневные"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/textViewNightOverShifts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Ночные"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/editTextDaysOvershifts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:ems="3"
+                    android:enabled="true"
+                    android:inputType="number"
+                    android:text="2"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/editTextNightOvershifts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:ems="3"
+                    android:enabled="true"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:text="3"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+
+            </TableRow>
+
+
+        </TableLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_begin="200dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
