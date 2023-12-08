@@ -6,10 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.ksv.atlantissalary.controller.Controller
+import com.ksv.atlantissalary.controller.datasaver.ActivityData
+import com.ksv.atlantissalary.controller.datasaver.impl.ActivityDataKeeper
 import com.ksv.atlantissalary.databinding.ActivityMainBinding
-import com.ksv.atlantissalary.model.AllWorkedHours
-import com.ksv.atlantissalary.utils.SettingKeeper
-import com.ksv.atlantissalary.utils.UserDataSet
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -22,30 +21,38 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-        controller = Controller(binding, this)
-        controller.onChangeInputData()
-        addListeners()
-
         prefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
 
+        addListeners()
+
+        controller = Controller(binding, this)
     }
 
     override fun onStart() {
         super.onStart()
-        val settingKeeper = SettingKeeper()
-        val userDataSet = settingKeeper.loadUserDataSet(prefs)
-        applyUserData(userDataSet)
-//        binding.editTextSalaryGrade.setText(userDataSet.grade.toString())
+//        val settingKeeper = SettingKeeper()
+//        val userDataSet = settingKeeper.loadUserDataSet(prefs)
+//        applyUserData(userDataSet)
+////        binding.editTextSalaryGrade.setText(userDataSet.grade.toString())
+//
+        val activityDataKeeper = ActivityDataKeeper(prefs)
+        val activityData = activityDataKeeper.load()
+        applyActivityData(activityData)
+
+        controller.onChangeInputData()
     }
 
     override fun onStop() {
         super.onStop()
-        val settingKeeper = SettingKeeper()
-//        val grade = binding.editTextSalaryGrade.text.toString().toFloat()
-//        val userDataSet = UserDataSet(grade, AllWorkedHours(0.0, 0.0, 0.0, 0.0), false)
-        val userDataSet = gatherUserData()
-        settingKeeper.saveUserDataSet(userDataSet, prefs)
+//        val settingKeeper = SettingKeeper()
+////        val grade = binding.editTextSalaryGrade.text.toString().toFloat()
+////        val userDataSet = UserDataSet(grade, AllWorkedHours(0.0, 0.0, 0.0, 0.0), false)
+//        val userDataSet = gatherUserData()
+//        settingKeeper.saveUserDataSet(userDataSet, prefs)
+//
+        val dataSaver = ActivityDataKeeper(prefs)
+        val activityData = gatherActivityData()
+        dataSaver.save(activityData)
     }
 //
 
@@ -142,29 +149,52 @@ class MainActivity : AppCompatActivity() {
         controller.onChangeInputData()
     }
 
-    private fun gatherUserData(): UserDataSet{
-
-        // !!!!!!!!!!   НУЖНА ПРОВЕРКА ВВОДА   !!!!!!!!!!!!!!!!
-
-        val grade = binding.editTextSalaryGrade.text.toString().toFloat()
-        val totalHours = binding.editTextTotalHours.text.toString().toFloat()
-        val nightHours = binding.editTextNightHours.text.toString().toFloat()
-        val daysOvershifts = binding.editTextDaysOvershifts.text.toString().toInt()
-        val nightOvershifts = binding.editTextNightOvershifts.text.toString().toInt()
+    private fun gatherActivityData(): ActivityData{
+        val grade = binding.editTextSalaryGrade.text.toString()
+        val totalHours = binding.editTextTotalHours.text.toString()
+        val nightHours = binding.editTextNightHours.text.toString()
+        val daysOvershifts = binding.editTextDaysOvershifts.text.toString()
+        val nightOvershifts = binding.editTextNightOvershifts.text.toString()
         val overShiftsChecked = binding.switchOverShifts.isChecked
 
-        return UserDataSet(grade, totalHours, nightHours, daysOvershifts, nightOvershifts, overShiftsChecked)
+        return ActivityData(grade, totalHours, nightHours, daysOvershifts, nightOvershifts, overShiftsChecked)
     }
 
-    private fun applyUserData(userDataSet: UserDataSet){
+    private fun applyActivityData(activityData: ActivityData){
         binding.apply {
-            editTextSalaryGrade.setText(userDataSet.grade.toString())
-            editTextTotalHours.setText(userDataSet.totalHours.toString())
-            editTextNightHours.setText(userDataSet.nightHours.toString())
-            editTextDaysOvershifts.setText(userDataSet.daysOverShifts.toString())
-            editTextNightOvershifts.setText(userDataSet.nightsOverShifts.toString())
-            switchOverShifts.isChecked = userDataSet.overShiftsChecked
+            editTextSalaryGrade.setText(activityData.grade)
+            editTextTotalHours.setText(activityData.totalHours)
+            editTextNightHours.setText(activityData.nightHours)
+            editTextDaysOvershifts.setText(activityData.daysOverShifts)
+            editTextNightOvershifts.setText(activityData.nightsOverShifts)
+            switchOverShifts.isChecked = activityData.overShiftsExists
         }
     }
+
+
+//    private fun gatherUserData(): UserDataSet{
+//
+//        // !!!!!!!!!!   НУЖНА ПРОВЕРКА ВВОДА   !!!!!!!!!!!!!!!!
+//
+//        val grade = binding.editTextSalaryGrade.text.toString().toFloat()
+//        val totalHours = binding.editTextTotalHours.text.toString().toFloat()
+//        val nightHours = binding.editTextNightHours.text.toString().toFloat()
+//        val daysOvershifts = binding.editTextDaysOvershifts.text.toString().toInt()
+//        val nightOvershifts = binding.editTextNightOvershifts.text.toString().toInt()
+//        val overShiftsChecked = binding.switchOverShifts.isChecked
+//
+//        return UserDataSet(grade, totalHours, nightHours, daysOvershifts, nightOvershifts, overShiftsChecked)
+//    }
+
+//    private fun applyUserData(userDataSet: UserDataSet){
+//        binding.apply {
+//            editTextSalaryGrade.setText(userDataSet.grade.toString())
+//            editTextTotalHours.setText(userDataSet.totalHours.toString())
+//            editTextNightHours.setText(userDataSet.nightHours.toString())
+//            editTextDaysOvershifts.setText(userDataSet.daysOverShifts.toString())
+//            editTextNightOvershifts.setText(userDataSet.nightsOverShifts.toString())
+//            switchOverShifts.isChecked = userDataSet.overShiftsChecked
+//        }
+//    }
 
 }
