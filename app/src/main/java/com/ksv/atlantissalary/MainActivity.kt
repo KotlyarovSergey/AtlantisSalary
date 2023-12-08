@@ -30,7 +30,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-
+//        val settingKeeper = SettingKeeper()
+//        val userDataSet = settingKeeper.loadUserDataSet(prefs)
+//        applyUserData(userDataSet)
+////        binding.editTextSalaryGrade.setText(userDataSet.grade.toString())
+//
         val activityDataKeeper = ActivityDataKeeper(prefs)
         val activityData = activityDataKeeper.load()
         applyActivityData(activityData)
@@ -40,11 +44,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-
+//        val settingKeeper = SettingKeeper()
+////        val grade = binding.editTextSalaryGrade.text.toString().toFloat()
+////        val userDataSet = UserDataSet(grade, AllWorkedHours(0.0, 0.0, 0.0, 0.0), false)
+//        val userDataSet = gatherUserData()
+//        settingKeeper.saveUserDataSet(userDataSet, prefs)
+//
         val dataSaver = ActivityDataKeeper(prefs)
         val activityData = gatherActivityData()
         dataSaver.save(activityData)
     }
+//
 
     private fun addListeners() {
         addTextChangedListeners()
@@ -53,12 +63,29 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addSwitchChangeListener() {
+        // binding.switchOverShifts.setOnClickListener {
+        //    controller.onChangeInputData()
+        // }
         binding.switchOverShifts.setOnCheckedChangeListener { _, checked ->
             controller.onChangeInputData()
             if (checked) {
                 binding.tableLayoutOverShifts.visibility = View.VISIBLE
+//                binding.tableLayoutOverShifts.layoutParams.height = LayoutParams.WRAP_CONTENT
+
+//                binding.editTextDaysOvershifts.isEnabled = true
+//                binding.editTextNightOvershifts.isEnabled = true
+//                binding.textViewSwitchOverShifts.setTextColor(Color.BLACK)
+//                binding.textViewDaysOverShifts.setTextColor(Color.BLACK)
+//                binding.textViewNightOverShifts.setTextColor(Color.BLACK)
             } else {
                 binding.tableLayoutOverShifts.visibility = View.GONE
+//                binding.tableLayoutOverShifts.layoutParams.height = 0
+
+//                binding.editTextDaysOvershifts.isEnabled = false
+//                binding.editTextNightOvershifts.isEnabled = false
+//                binding.textViewSwitchOverShifts.setTextColor(Color.GRAY)
+//                binding.textViewDaysOverShifts.setTextColor(Color.GRAY)
+//                binding.textViewNightOverShifts.setTextColor(Color.GRAY)
             }
         }
     }
@@ -93,6 +120,7 @@ class MainActivity : AppCompatActivity() {
                 if (nightHours != binding.editTextNightHours.text.toString())
                     inputDataChanged()
             }
+
         }
 
         var dayOvershifts = binding.editTextDaysOvershifts.text.toString()
@@ -113,6 +141,7 @@ class MainActivity : AppCompatActivity() {
                 if (nightOvershifts != binding.editTextNightOvershifts.text.toString())
                     inputDataChanged()
             }
+
         }
     }
 
@@ -141,4 +170,31 @@ class MainActivity : AppCompatActivity() {
             switchOverShifts.isChecked = activityData.overShiftsExists
         }
     }
+
+
+//    private fun gatherUserData(): UserDataSet{
+//
+//        // !!!!!!!!!!   НУЖНА ПРОВЕРКА ВВОДА   !!!!!!!!!!!!!!!!
+//
+//        val grade = binding.editTextSalaryGrade.text.toString().toFloat()
+//        val totalHours = binding.editTextTotalHours.text.toString().toFloat()
+//        val nightHours = binding.editTextNightHours.text.toString().toFloat()
+//        val daysOvershifts = binding.editTextDaysOvershifts.text.toString().toInt()
+//        val nightOvershifts = binding.editTextNightOvershifts.text.toString().toInt()
+//        val overShiftsChecked = binding.switchOverShifts.isChecked
+//
+//        return UserDataSet(grade, totalHours, nightHours, daysOvershifts, nightOvershifts, overShiftsChecked)
+//    }
+
+//    private fun applyUserData(userDataSet: UserDataSet){
+//        binding.apply {
+//            editTextSalaryGrade.setText(userDataSet.grade.toString())
+//            editTextTotalHours.setText(userDataSet.totalHours.toString())
+//            editTextNightHours.setText(userDataSet.nightHours.toString())
+//            editTextDaysOvershifts.setText(userDataSet.daysOverShifts.toString())
+//            editTextNightOvershifts.setText(userDataSet.nightsOverShifts.toString())
+//            switchOverShifts.isChecked = userDataSet.overShiftsChecked
+//        }
+//    }
+
 }
